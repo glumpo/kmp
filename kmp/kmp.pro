@@ -4,4 +4,10 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+    tvector.cpp \
+    kmp.cpp
+
+HEADERS += \
+    tvector.h \
+    kmp.h
