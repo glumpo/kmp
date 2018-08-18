@@ -18,13 +18,13 @@ static void BM_KMP_CONCATTENATION(benchmark::State &state) {
   sprintf(buf, "../tests/tests/%.2i.t", int(state.range(0)));
 
   freopen(buf, "r", stdin);
-  read_input(pattern);
+  read_inp(pattern);
 
   for (auto _ : state) {
     NKmpAlgo::kmpConcatenation(text, pattern);
   }
 }
-BENCHMARK(BM_KMP_CONCATTENATION)->Arg(1)->Arg(2)->Arg(3);
+BENCHMARK(BM_KMP_CONCATTENATION)->Arg(0)->Arg(1)->Arg(2);
 
 
 BENCHMARK_MAIN();
