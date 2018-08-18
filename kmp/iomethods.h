@@ -13,10 +13,32 @@ namespace NInput {
 static bool IS_EOF = false;
 static bool IS_NL  = false;
 
-inline uint32_t read_int() {
+inline void write_int(size_t x) {
+  char buf[10], *p = buf;
+  do
+  {
+    *p++ = '0' + x % 10;
+    x /= 10;
+  } while (x);
+  do
+  {
+    putchar(*--p);
+  } while (p > buf);
+}
+
+inline bool read_int(uint32_t &res)
+{
   int c;
-  uint32_t res = 0;
-  while ((c = getchar()) != '\n' && IS_INT(c)) {
+  res = 0;
+
+  c = getchar();
+  if (EOF == c) {
+    IS_EOF = true;
+    return  false;
+  }
+  res = uint32_t(c - '0');
+
+  while ((c = getchar()) && IS_INT(c)) {
     res = res * 10 + uint32_t(c - '0');
   }
 
@@ -28,16 +50,21 @@ inline uint32_t read_int() {
     IS_NL = true;
   }
 
-  return res;
+  return true;
 }
 
-inline void read_input(TVector<uint32_t> &inp) {
-  uint32_t tmp;
-  while (void(tmp = read_int()), !IS_NL) {
-    inp.PushBack(tmp);
+inline void get_inp(TVector<uint32_t> &inp,
+                    TVector<size_t> &wordsCount) {
+  while (!IS_EOF) {
+    size_t wc = 0;
+    uint32_t c;
+    while (!IS_NL && read_int(c)) {
+      inp.PushBack(c);
+      ++wc;
+    }
+    IS_NL = false;
+    wordsCount.PushBack(wc);
   }
-  inp.PushBack(tmp);
-  IS_NL = false; // for future reading
 }
 } // namespace NInput
 
