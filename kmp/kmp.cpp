@@ -1,4 +1,4 @@
-#include <kmp.h>
+#include "kmp.h"
 
 #include <string>
 namespace NKmpAlgo {

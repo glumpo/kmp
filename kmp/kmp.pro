@@ -10,4 +10,5 @@ SOURCES += \
 
 HEADERS += \
     tvector.h \
-    kmp.h
+    kmp.h \
+    iomethods.h
