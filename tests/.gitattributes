@@ -1,2 +1,2 @@
-./tests/* linguist-generated=true
+*.t linguist-generated=true
 
