@@ -1,30 +1,45 @@
-#include <iostream>
 #include <benchmark/benchmark.h>
+#include <iostream>
 
-
-#include "../kmp/tvector.h"
-#include "../kmp/tvector.cpp"
-#include "../kmp/kmp.h"
-#include "../kmp/kmp.cpp"
 #include "../kmp/iomethods.h"
+#include "../kmp/tkmpalgo.cpp"
+#include "../kmp/tkmpalgo.h"
+#include "../kmp/tvector.cpp"
+#include "../kmp/tvector.h"
 
 using namespace NInput;
 
-static void BM_KMP_CONCATTENATION(benchmark::State &state) {
-  TVector<uint32_t> pattern, text;
-  TVector<size_t> res;
-
-  char buf[50];
-  sprintf(buf, "../tests/tests/%.2i.t", int(state.range(0)));
-
+static TKmpAlgo kmp;
+static void initialize(int n = 2) {
+  static bool initialized = false;
+  if (initialized) {
+    return;
+  }
+  initialized = true;
+  char buf[100];
+  sprintf(buf, "../tests/tests/%.2i.t", n);
   freopen(buf, "r", stdin);
-  read_inp(pattern);
 
+  kmp.GetPatternAndTextFromStdin();
+};
+
+static void BM_KMP_CONCATTENATION_PREFIX(benchmark::State &state) {
   for (auto _ : state) {
-    NKmpAlgo::kmpConcatenation(text, pattern);
+    kmp.KMPConcatenationPrefix();
   }
 }
-BENCHMARK(BM_KMP_CONCATTENATION)->Arg(0)->Arg(1)->Arg(2);
+BENCHMARK(BM_KMP_CONCATTENATION_PREFIX);
 
+static void BM_KMP_CONCATTENATION_Z(benchmark::State &state) {
+  for (auto _ : state) {
+    kmp.KMPConcatenationZFunction();
+  }
+}
+BENCHMARK(BM_KMP_CONCATTENATION_Z);
 
-BENCHMARK_MAIN();
+int main(int argc, char **argv) {
+  initialize();
+  ::benchmark::Initialize(&argc, argv);
+  if (::benchmark::ReportUnrecognizedArguments(argc, argv)) return 1;
+  ::benchmark::RunSpecifiedBenchmarks();
+}

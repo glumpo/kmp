@@ -7,8 +7,7 @@ template <class T>
 size_t TVector<T>::highCloseTwoPowerSystemSpecific(size_t x) const {
   const size_t X_CAPACITY = 32;
   x--;
-  for (size_t p = 1; p < X_CAPACITY; p <<= 1)
-    x |= (x >> p);
+  for (size_t p = 1; p < X_CAPACITY; p <<= 1) x |= (x >> p);
   return ++x;
 }
 
@@ -20,8 +19,7 @@ size_t TVector<T>::highCloseTwoPower(size_t x) const {
 
   size_t p2 = 1;
   while (1) {
-    if (p2 >= x)
-      return p2;
+    if (p2 >= x) return p2;
     p2 <<= 1;
   }
 
@@ -35,8 +33,7 @@ TVector<T>::TVector(const size_t size) {
   this->LastIndex = 0;
   if (0 == RealSize) {
     this->Data = nullptr;
-  }
-  else {
+  } else {
     this->Data = (T *)malloc(this->RealSize * sizeof(T));
   }
 }
@@ -46,29 +43,30 @@ TVector<T>::~TVector() {
   free(this->Data);
   this->Data = nullptr;
   this->LastIndex = 0;
-  this->RealSize  = 0;
+  this->RealSize = 0;
 }
 
 template <class T>
 TVector<T> &TVector<T>::operator=(TVector<T> &&other) noexcept {
   free(this->Data);
 
-  this->Data      = other.Data;
-  this->RealSize  = other.RealSize;
+  this->Data = other.Data;
+  this->RealSize = other.RealSize;
   this->LastIndex = other.LastIndex;
 
   other.Data = nullptr;
+  return *this;
 }
 
 template <class T>
 TVector<T>::TVector(TVector &&other) noexcept {
-  this->Data      = other.Data;
+  this->Data = other.Data;
   this->LastIndex = other.LastIndex;
-  this->RealSize  = other.RealSize;
+  this->RealSize = other.RealSize;
 
-  other.Data      = nullptr;
+  other.Data = nullptr;
   other.LastIndex = 0;
-  other.RealSize  = 0;
+  other.RealSize = 0;
 }
 
 template <class T>
@@ -95,8 +93,7 @@ void TVector<T>::PushBack(T el) {
 
 template <class T>
 T &TVector<T>::operator[](const size_t index) const {
-  if (index >= this->LastIndex)
-    this->LastIndex = index + 1;
+  if (index >= this->LastIndex) this->LastIndex = index + 1;
   T &res = this->Data[index];
   return res;
 }

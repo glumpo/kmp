@@ -6,9 +6,10 @@ CONFIG -= qt
 SOURCES += \
         main.cpp \
     tvector.cpp \
-    kmp.cpp
+    tinput.cpp \
+    talgoritmkmp.cpp
 
 HEADERS += \
     tvector.h \
-    kmp.h \
-    iomethods.h
+    tinput.h \
+    talgoritmkmp.h
