@@ -29,16 +29,23 @@ TVector<TPos> TAlgoritmKMP::Kmp() {
   int32_t cur;
   cur = inp.ReadInt();
   auto sn = inp.StringNumber();
+  auto sn_res = sn;
+  size_t i_res = 0;
   for (size_t i = 1; !inp.IsEof(); ++i, cur = inp.ReadInt()) {
     while (q > 0 && pattern[q] != cur) {
       q = pi[q];
     }
 
     if (pattern[q] == cur) {
-      ++q;
+      if (0 == q) {
+        sn_res = sn;
+        i_res = i;
+      }
+      while (pattern[++q] == cur)
+        ;
     }
     if (m == q) {
-      res.PushBack(TPos(i - m + 1, sn));
+      res.PushBack(TPos(i_res, sn_res));
       q = pi[q];
     }
     auto sn_temp = inp.StringNumber();
