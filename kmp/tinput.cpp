@@ -1,17 +1,9 @@
 #include "tinput.h"
 
-// int32_t TInput::ReadInt() {
-//  int32_t res;
-//  std::cin >> res;
-//  if (std::cin.eof()) {
-//    this->isEof = true;
-//  }
-//  return res;
-//}
-
 int32_t TInput::ReadInt() {
   int c;
-  c = getchar();
+  while ((c = getchar()) == ' ')
+    ;
   int32_t res = c - '0';
   while (c = getchar(), c >= '0' && c <= '9') {
     res = res * 10 + (c - '0');

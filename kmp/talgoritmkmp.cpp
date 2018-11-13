@@ -20,11 +20,11 @@ TVector<size_t> TAlgoritmKMP::PrefixF(TVector<int32_t> &p) {
 
 void TAlgoritmKMP::GerPatternFromStdin() { pattern = inp.GetString(std::cin); }
 
-TVector<std::pair<size_t, int16_t>> TAlgoritmKMP::Kmp() {
+TVector<TPos> TAlgoritmKMP::Kmp() {
   auto pi = PrefixF(pattern);
   const auto m = pattern.Size();
 
-  auto res = TVector<std::pair<size_t, int16_t>>();
+  auto res = TVector<TPos>();
   size_t q = 0;
   int32_t cur;
   cur = inp.ReadInt();
@@ -38,7 +38,7 @@ TVector<std::pair<size_t, int16_t>> TAlgoritmKMP::Kmp() {
       ++q;
     }
     if (m == q) {
-      res.PushBack(std::pair<size_t, int16_t>(i - m + 1, sn));
+      res.PushBack(TPos(i - m + 1, sn));
       q = pi[q];
     }
     auto sn_temp = inp.StringNumber();

@@ -13,7 +13,6 @@ class TInput {
 
  public:
   int32_t ReadInt();
-  //  int32_t ReadIntFast();
   TVector<int32_t> GetString(std::istream &in);
   inline int16_t StringNumber() { return stringNumber; }
   inline bool IsEof() { return isEof; }
