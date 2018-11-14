@@ -7,10 +7,9 @@
 
 template <class T>
 class TVector {
-public:
+ public:
   TVector(const size_t size);
-  TVector(const size_t size, T x)
-    : TVector(size) {
+  TVector(const size_t size, T x) : TVector(size) {
     for (size_t i = 0; i < size; ++i) {
       Data[i] = x;
     }
@@ -25,7 +24,7 @@ public:
   T &operator[](const size_t index) const;
   size_t Size() const;
 
-protected:
+ protected:
   TVector(const TVector &) = delete;
   void operator=(const TVector &) = delete;
 

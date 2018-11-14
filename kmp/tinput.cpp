@@ -9,7 +9,10 @@ int32_t TInput::ReadInt() {
     res = res * 10 + (c - '0');
   }
 
+  stringSize[size_t(stringNumber - 1)] += 1;
+
   if ('\n' == c) {
+    stringSize.PushBack(0);
     ++stringNumber;
   }
 

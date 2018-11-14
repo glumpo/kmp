@@ -13,3 +13,7 @@ HEADERS += \
     tvector.h \
     tinput.h \
     talgoritmkmp.h
+
+DISTFILES += \
+    ../run-kmp-Desktop-Debug/input.txt \
+    ../run-kmp-Desktop-Debug/output.txt
