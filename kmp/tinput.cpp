@@ -2,7 +2,7 @@
 
 int32_t TInput::ReadInt() {
   int c;
-  while ((c = getchar()) == ' ')
+  while (isspace(c = getchar()))
     ;
   int32_t res = c - '0';
   while (c = getchar(), c >= '0' && c <= '9') {
