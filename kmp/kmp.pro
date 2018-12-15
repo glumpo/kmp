@@ -12,7 +12,8 @@ SOURCES += \
 HEADERS += \
     tvector.h \
     tinput.h \
-    talgoritmkmp.h
+    talgoritmkmp.h \
+    kmp_typedefs.h
 
 DISTFILES += \
     ../run-kmp-Desktop-Debug/input.txt \

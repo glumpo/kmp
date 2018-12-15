@@ -3,21 +3,25 @@
 
 #include <iostream>
 #include <utility>
+#include "kmp_typedefs.h"
 #include "tvector.cpp"
 #include "tvector.h"
 
 class TInput {
  private:
-  int16_t stringNumber = 1;
+  str_number_t stringNumber = 1;
   bool isEof = false;
   TVector<size_t> stringSize = TVector<size_t>(1, 0);
 
  public:
-  int32_t ReadInt();
-  TVector<int32_t> GetString(std::istream &in);
-  inline int16_t StringNumber() { return stringNumber; }
+  letter_t ReadInt();
+  TVector<letter_t> GetString(std::istream &in);
+  // NOTE: I should throw exception if StringNumber used befor ReadInt
+  // Or (it`s better) make some buffer and read ints from string number if
+  // needed
+  inline str_number_t StringNumber() { return stringNumber; }
   inline bool IsEof() { return isEof; }
-  inline size_t StringSize(int16_t n) { return stringSize[size_t(n - 1)]; }
+  inline size_t StringSize(str_number_t n) { return stringSize[size_t(n - 1)]; }
 };
 
 #endif  // TALGORITHMKMP_H

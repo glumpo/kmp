@@ -1,7 +1,6 @@
 #include "talgoritmkmp.h"
-#include <queue>
 
-TVector<size_t> TAlgoritmKMP::PrefixF(TVector<int32_t> &p) {
+TVector<size_t> TAlgoritmKMP::PrefixF(TVector<letter_t> &p) {
   auto n = p.Size();
   auto pi = TVector<size_t>(n);
   pi[0] = 0;
@@ -19,7 +18,7 @@ TVector<size_t> TAlgoritmKMP::PrefixF(TVector<int32_t> &p) {
   return pi;
 }
 
-void TAlgoritmKMP::GerPatternFromStdin() { pattern = inp.GetString(std::cin); }
+void TAlgoritmKMP::GetPatternFromStdin() { pattern = inp.GetString(std::cin); }
 
 TVector<TPos> TAlgoritmKMP::Kmp() {
   auto pi = PrefixF(pattern);
@@ -27,8 +26,11 @@ TVector<TPos> TAlgoritmKMP::Kmp() {
 
   auto res = TVector<TPos>();
   size_t q = 0;
+
+  // WARNING: It`s importantn to read int befor setting string number
+  // Becouze string may has no int
+  letter_t cur = inp.ReadInt();
   auto sn = inp.StringNumber();
-  int32_t cur = inp.ReadInt();
   for (size_t i = 1; !inp.IsEof(); ++i, cur = inp.ReadInt()) {
     while (q > 0 && pattern[q] != cur) {
       q = pi[q - 1];
@@ -38,7 +40,7 @@ TVector<TPos> TAlgoritmKMP::Kmp() {
       ++q;
     }
     if (m == q) {
-      decltype(i) i_res;
+      size_t i_res;
       decltype(sn) sn_res;
       if (inp.StringSize(sn) >= m) {
         i_res = i - m + 1;

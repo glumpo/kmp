@@ -2,6 +2,7 @@
 #define TALGORITMKMP_H
 
 #include <iostream>
+#include "kmp_typedefs.h"
 #include "tinput.h"
 #include "tvector.cpp"
 #include "tvector.h"
@@ -14,12 +15,12 @@ struct TPos {
 
 class TAlgoritmKMP {
  private:
-  TVector<int32_t> pattern;
+  TVector<letter_t> pattern;
   TInput inp = TInput();
 
  public:
-  TVector<size_t> PrefixF(TVector<int32_t> &p);
-  void GerPatternFromStdin();
+  TVector<size_t> PrefixF(TVector<letter_t> &p);
+  void GetPatternFromStdin();
   TVector<TPos> Kmp();
 };
 
